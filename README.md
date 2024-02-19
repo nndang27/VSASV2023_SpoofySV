@@ -1,9 +1,9 @@
-# VSASV2023_SpoofySV
+# VSASV2023 SpoofySV team
 
-# 0x00 ASV
 This repository provides our solution for the challenge VSASV in VLSP 2023.
 You can check the final result in ['VSASV2023 submission'](https://aihub.ml/competitions/602#results)
-Find baseline models:
+
+Baseline models:
 ASV task in ['ECAPA-TDNN'](https://github.com/TaoRuijie/ECAPA-TDNN)
 CM task in ['VSASV2023 submission'](https://github.com/clovaai/aasist)
 
