@@ -31,5 +31,5 @@ We used some public pre-trained models and some models we trained ourselves on t
 | ECAPA-TDNN + S2pecNet                      |        4.33        |  
 | Res2Net    + S2pecNet                      |        3.65        |
 | Res2Net + S2pecNet(perturb phase)          |        3.17        |
-| hard voting (res2net + res2next + ecapa) + |        2.86        |
-|  S2pecNet(perturb phase)                   |                    |
+| hard voting (res2net + res2next + ecapa) + S2pecNet(perturb phase) |        2.86        |
+
