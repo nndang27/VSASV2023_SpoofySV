@@ -1,19 +1,21 @@
 # VSASV2023_SpoofySV
 
 # 0x00 ASV
-This directory provides code related to extracting speaker embeddings. 
-We used some public pre-trained models and some models we trained ourselves on the Voxceleb2 dataset to extract speaker embeddings.
-```bash
-./run_spk_ebd_extract.sh
-```
-# 0x02 Test different ASV models and AASIST(CM) pre-train model
+This repository provides our solution for the challenge VSASV in VLSP 2023.
+You can check the final result in ['VSASV2023 submission'](https://aihub.ml/competitions/602#results)
+Find baseline models:
+ASV task in ['ECAPA-TDNN'](https://github.com/TaoRuijie/ECAPA-TDNN)
+CM task in ['VSASV2023 submission'](https://github.com/clovaai/aasist)
 
-```bash
-./run_test_nonorm.sh
-```
-```bash
-./run_test_l2norm.sh
-```
+Fine-tune the newest state of the art CM model that published in INTERSPEECH 2023 ['S2pecNet'](https://github.com/ph-w2000/S2pecNet)
+Then we develop CM model by technique to perturb phase. Read in ['Phase perturbation improves channel robustness for speech spoofing countermeasures'](https://arxiv.org/abs/2306.03389)
+
+To generate more data for training, we apply voice conversion ['VQ-VAE'](https://github.com/bshall/ZeroSpeech) and voice cloning ['Vietnamese Voice Cloning'](https://github.com/v-nhandt21/ViSV2TTS ) 
+
+For cleaning training set, we extract the embedding of each audio by a self-supervised ASV model ['Loss-Gated Learning'](https://github.com/TaoRuijie/Loss-Gated-Learning?fbclid=IwAR1q4MSfjWU8y5FeMm3X07zyzB3JmFaH52gNPFB6QMFYUZ_5ggstKHThovE)
+Then we use DBSCAN clustering to distinguish multiple voices, noise, music in an id and only keep the main voice.
+
+# Test different ASV and CM models
 
 #  Result
 ## NoNorm Score Fusion
