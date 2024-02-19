@@ -1,0 +1,35 @@
+Pipeline chia tập test
+
+
+0. Gán nhãn nam nữ bằng tai
+1. Dùng melspectrogram để train model ml cho nhanh (GMM) dùng cho clustering(k-means/DBSCAN) 950 speaker(tb của 3 audio bất kỳ) ra thành các cụm và chúng ta sẽ sử dụng 6 cụm bất kỳ miễn là số phần tử trong cụm >15 và ưu tiên các cụm có tổng audio ít nhất trong đó
+	+ Cụm 1:  10 nữ giống  nhau nhất trong 1 cụm (cosine distance)
+	+ Cụm 2: 10 nữ giống  nhau nhất trong 1 cụm (cosine distance)
+	+ Cụm 3: 15 nữ giống  nhau nhất trong 1 cụm (cosine distance)
+	+ Cụm 4:  10 nam giống  nhau nhất trong 1 cụm (cosine distance)
+	+ Cụm 5: 10 nam giống  nhau nhất trong 1 cụm (cosine distance)
+	+ Cụm 6: 15 nam giống  nhau nhất trong 1 cụm (cosine distance)
+2. Lấy Cụm 1 và cụm 4 làm tập validation cho fusion, cụm 2,3,5,6 làm validation cho assist và ecapa
+3. Validation cho fusion: 20 speaker từ cụm 1 và 4: bắt đầu tiến hành chia cặp audio:
+	- Set up:
+		+ Chia thành 4 nhóm audio [ Nhóm A(30% audio ngẫu nhiên cụm 1), Nhóm B (70% còn lại cụm 1), Nhóm C (30% ngẫu nhiên cụm 4), Nhóm D (70% còn lại cụm 4) ] 
+		+ Mỗi audio sẽ gen ra 4 cặp samples ( 1 cặp bonafide target, 1 cặp bonefine non target, 1 cặp spoof la, 1 cặp spoof pa) > tổng số sample = 4* số audio.
+	- Cách chia:
+		+ Với ECAPA (1):	Nhóm A,C(easy): 1 audio ngẫu nhiên trong cùng speaker, 1 audio ngẫu nhiêu khác speaker
+					Nhóm B,D(hard): 1 trong 5 audio có cosine sim bé nhất(so sánh bằng embeding ecapa tự train/ ecapa pretrain(cắn trộm)/ML model vs melspectrogram ở trên) trong cùng 1 speaker, 1 trong 5 audio có cosine sim lớn nhất khác speaker nhưng cùng nhóm
+		+ Với ASSIST (2):	Nhóm A,C(easy): lấy conversion tự train và pa gen bằng loa ngoài
+					Nhóm B,D(hard): thực hiện pretrain conversion / pretrain voice cloning(cắn trộm) và lấy pa cho mỗi audio
+
+	=> Lọc trùng các cặp audio để cho ra tập validation
+4. Validation cho ASSIST:
+	- Set up:
+		+ Chia thành 8 nhóm audio [ Nhóm A(30% audio ngẫu nhiên cụm 2), Nhóm B (70% còn lại cụm 2), Nhóm C (30% ngẫu nhiên cụm 3), Nhóm D (70% còn lại cụm 3), Nhóm E(30% audio ngẫu nhiên cụm 5), Nhóm F (70% còn lại cụm 5), Nhóm G (30% ngẫu nhiên cụm 6), Nhóm H (70% còn lại cụm 6) ] 
+		+ Mỗi audio sẽ gen ra 2 cặp samples ( 1 cặp bonafide target, 1 cặp bonefine non target) > tổng số sample = 2* số audio.
+	- Cách chia: giống (1)
+5. Validation cho ECAPA: 
+	- Set up:
+		+ Chia thành 8 nhóm audio [ Nhóm A(30% audio ngẫu nhiên cụm 2), Nhóm B (70% còn lại cụm 2), Nhóm C (30% ngẫu nhiên cụm 3), Nhóm D (70% còn lại cụm 3), Nhóm E(30% audio ngẫu nhiên cụm 5), Nhóm F (70% còn lại cụm 5), Nhóm G (30% ngẫu nhiên cụm 6), Nhóm H (70% còn lại cụm 6) ] 
+		+ Mỗi audio sẽ gen ra 3 cặp samples ( 1 cặp bonafide, 1 cặp spoof la, 1 cặp spoof pa) > tổng số sample = 3* số audio.
+	- Cách chia: giống (2)
+
+6,5,3,2
