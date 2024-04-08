@@ -1,0 +1,20 @@
+model: Res2NeXt50
+nOut: 256
+encoder_type: ASP
+trainfunc: aamsoftmax
+max_seg_per_spk: 1000
+max_epoch: 60
+
+# batch_size: 32
+# nClasses: 1122
+# augment: True
+# save_path: /kaggle/working/exps/Res2Next50
+# output_path: /kaggle/working/submission/Res2Next50/aamsoftmax
+
+# train_list: /kaggle/working/train_list.txt
+# train_path: /kaggle/input/nndang-vn-celeb/VLSP23_VN_celeb2/train_celeb
+# test_list: /kaggle/working/eval_list.txt
+# test_path: /kaggle/input/nndang-vn-celeb/VLSP23_VN_celeb2/valid_celeb
+
+# musan_path: /kaggle/input/musan-dataset
+# rir_path: /kaggle/input/room-impulse-response-and-noise-database

@@ -1,0 +1,13 @@
+model: RawNet3
+encoder_type: ECA
+nOut: 256
+sinc_stride: 10
+max_frames: 300
+eval_frames: 300
+trainfunc: aamsoftmax
+lr_decay: 0.95
+weight_decay: 5e-05
+max_seg_per_spk: 500
+
+# augment: True
+# save_path: exps/RawNet3_AAM
